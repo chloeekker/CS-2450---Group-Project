@@ -31,40 +31,40 @@ UVUAdvisorBot provides instant responses to queries about campus life, admission
     - Output: Recommended courses with details
 
 2. Update Academic Plans
-- Input: Student preferences and graduation timeline
-- Output: Semester-wise academic plan
+    - Input: Student preferences and graduation timeline
+    - Output: Semester-wise academic plan
 
 3. Verifying Prerequisits
-- Input: Selected course
-- Output: Prerequisite check result
+    - Input: Selected course
+    - Output: Prerequisite check result
 
 4. Finacial Aid Inquiry
-- Input: Student preferences
-- Output: Finacial Aid options
+    - Input: Student preferences
+    - Output: Finacial Aid options
 
 5. Housing Inquiry
-- Input: Student preferences
-- Output: On-campus housing requirements and options
+    - Input: Student preferences
+    - Output: On-campus housing requirements and options
 
 6. Student Club Inquiry
-- Input: Student Preferences
-- Output: List of Clubs based on Student Preferences
+    - Input: Student Preferences
+    - Output: List of Clubs based on Student Preferences
 
 7. Graduation Timeline Inquiry
-- Input: Student Question about Academic History/Future
-- OutPut: Personalized Academic Timeline
+    - Input: Student Question about Academic History/Future
+    - OutPut: Personalized Academic Timeline
 
 8. Campus Life Inquiry
-- Input: Student Preference
-- Output: Result 
+    - Input: Student Preference
+    - Output: Result 
 
 9. Integration with Student Portal
-- Input: Student login credentials
-- Output: Access to student records for updating academic plans
+    - Input: Student login credentials
+    - Output: Access to student records for updating academic plans
 
 10. Integration with Administrative Databases
-- Input: Course catalogs, student records
-- Output: Fetch relevant data for recommendations and updates
+    - Input: Course catalogs, student records
+    - Output: Fetch relevant data for recommendations and updates
 
 
 
