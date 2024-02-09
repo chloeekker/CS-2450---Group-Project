@@ -12,7 +12,7 @@
 
 ## Functionalities
 ### Personalized Course Reccomendations
-UvuAdvisorBot will anazyle a students academic records and will provide a personalized course reccomendations. It will also consider factors like course difficulty, historical grade distributions, and faculty reviews. 
+UVUAdvisorBot will anazyle a students academic records and will provide a personalized course reccomendations. It will also consider factors like course difficulty, historical grade distributions, and faculty reviews. 
 
 ### Real-Time Prerequisite Checks
 For any selected course, the bot instantly verifies prerequisite requirements and offers alternatives or prerequisite waiver procedures if applicable.
