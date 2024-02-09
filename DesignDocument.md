@@ -27,8 +27,8 @@ UVUAdvisorBot provides instant responses to queries about campus life, admission
 ## Use Cases
 
 1. Handling Course Reccomendations
-- Input: Student academic records and preferences
-- Output: Recommended courses with details
+    - Input: Student academic records and preferences
+    - Output: Recommended courses with details
 
 2. Update Academic Plans
 - Input: Student preferences and graduation timeline
