@@ -1,13 +1,13 @@
-# CS-2450---Group-Project
+# CS-2450--Group-Project
 
 
 ## Description
 This README will give a detailed steps to set up a UVUAdvisorBot from the command line
----
+
 
 ## Prerequisites
 Python 3.8 or higher installed
----
+
 ## Installation
 
 To set up the UVUAdvisorBot from the command line, it is important to first download privateGPT github file repository(https://github.com/imartinez/privateGPT). After that, clone the web URL and go to the command line. Make sure python is downloaded onto your device and then input this command into the comand line: git clone https://github.com/imartinez/privateGPT && cd privateGPT && \
