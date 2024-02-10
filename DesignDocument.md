@@ -1,4 +1,4 @@
-# UVUAdcisorBot Design Document
+# UVUAdvisorBot Design Document
 ## Introduction
  UVUAdvisor is an advanced software system developed by Utah Valley University to provide comprehensive advising services to students. It applies artifical intelligence and integrates a univeristy database in order to suggest personalized academic guidance. This document will outline the architecure and functions of the UVUAdvisorBot.
 
