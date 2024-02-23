@@ -1,0 +1,19 @@
+2/9/2024 
+Attendees- Chloe Aaron Eric
+Meeting time 1:00 P.M-2:30 P.M
+Discussion- We were able to set upo the ReadME.md to complete the requirement for milestone 2, Started working on the extra credit as well by installing jupyter and anaconda to work with Visual Studio code.
+Then also created simulated test cases since no other test cases were rpivided by the professor. After trying to contact the professor previously about the issues that arised before the meeting started. 
+Questions- What documents are needed for the test cases and how do we submit them into the privategpt? 
+What are the test cases supposed to look like when they are actaully implimated into the privategpt? 
+
+2/23/2024
+Attendees- Chloe Aaron Eric 
+Meeting Time 12:30 P.M.-3:30 PM
+Discussion- We all created our different srs files that we then combined into one final srs that we submited into the srs branch. Then we went on to create the wireframe/GUI model that we uploaded into the
+GUI.png and the GUI.py that created for that GUI requirement. Were we used Tkinter to create just a quick outline of what we want it to look like. Then we went in and found a simple tasks for the different
+classes that we submitted into the classes.png and we will further be expaniding as we move along the different requierments. With altogehter we submited all the tasks to the trello that has also been linked
+to the trello.
+Questions- How to implement the GUI into code? Which we found out that Tkinter would be our best option as of right now.
+What other classes are you looking for in the requirements?
+How can we design the chatbox to our liking and where can we find that?
+ 
