@@ -23,3 +23,8 @@ Doing all that will create a file named privateGPT on your device and will insta
     poetry run python3.11 -m private_gpt
 It will then create the server and then you can either open a new terminal and enter: open http://127.0.0.1:8001/ or you can copy and paste and address it gives you into a brower and it will open. 
 
+
+
+## GUI
+
+For the gui we used tkinter which is an already installed python library so no extra download is required. 
