@@ -1,5 +1,12 @@
 import streamlit as st
 
+'''
+to run in terminal: get to correct directory 
+
+$streamlit run uvu_bot.py  
+
+'''
+
 # Header
 st.title("UVUAdvisor Bot")
 
