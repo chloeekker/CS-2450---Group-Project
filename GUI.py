@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 
 
 
@@ -27,7 +28,7 @@ def main():
     st.title("UVUAdvisor Bot")
 
 
-    settingButton,whatIfButton, searchButton, myProfileButton = st.columns(4)
+    settingButton,whatIfButton, roleSelect, myProfileButton = st.columns(4)
     with settingButton:
         if st.button("Setting"):
             setting_df = pd.DataFrame( #Creates the data frame
@@ -49,17 +50,25 @@ def main():
                         ],
                         required=True,
                     )
-                },
-                hide_index=True,
-            )  
+                }
+            )    
+            if st.button("Setting"):
+                hide_index=True
+                pass
+             
     with whatIfButton:
         if st.button("What-If"):
             # Handle What-If button click
             pass
-    with searchButton:
-        if st.button("Search"):
+    with roleSelect:
+        if st.button("RoleSelector"):
+            expand = st.expander("Role Select")
+            expand.write("Please Select on of the roles")
+            pop = st.popover("Click to Select Role")
+            pop.checkbox("Show all")
+            with expand:
+                roleSelect = st.radio("Select one:", ["Administrator", "User", "Advisor"])
             # Handle Search button click
-            pass
     with myProfileButton:
         if st.button("My Profile"):
             # Handle My Profile button click
