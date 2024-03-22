@@ -27,7 +27,11 @@ def main():
     st.title("UVUAdvisor Bot")
 
 
-    whatIfButton, searchButton, myProfileButton = st.columns(3)
+    settingButton,whatIfButton, searchButton, myProfileButton = st.columns(4)
+    with settingButton:
+        if st.button("Setting"):
+            #Handle settings button (such as color changes)
+            pass
     with whatIfButton:
         if st.button("What-If"):
             # Handle What-If button click
