@@ -28,7 +28,7 @@ def main():
     st.title("UVUAdvisor Bot")
 
 
-    settingButton,whatIfButton, roleSelect, myProfileButton = st.columns(4)
+    settingButton,colorSelector, roleSelect, myProfileButton = st.columns(4)
     with settingButton:
         if st.button("Setting"):
             setting_df = pd.DataFrame( #Creates the data frame
@@ -56,8 +56,14 @@ def main():
                 hide_index=True
                 pass
              
-    with whatIfButton:
+    with colorSelector:
         if st.button("What-If"):
+            on = st.toggle('Dark Mode')
+            lightMode = st.toggle("LightMode")
+            if on:
+                st.write('Feature activated!')
+            if lightMode:
+                st.write('Feature activited!')
             # Handle What-If button click
             pass
     with roleSelect:
