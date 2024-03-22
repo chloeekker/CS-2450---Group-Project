@@ -27,7 +27,31 @@ def main():
     st.title("UVUAdvisor Bot")
 
 
-    whatIfButton, searchButton, myProfileButton = st.columns(3)
+    settingButton,whatIfButton, searchButton, myProfileButton = st.columns(4)
+    with settingButton:
+        if st.button("Setting"):
+            setting_df = pd.DataFrame( #Creates the data frame
+            {
+                "Options": [
+                "Change Color",
+                "Create new account",],
+            })
+            st.data_editor(
+                setting_df,
+                # Configurates the colum into a select box column
+                column_config={
+                    "options": st.column_config.SelectboxColumn
+                        ("Setting category",help="The options for setting",width="small",
+                #The different option choices we have
+                        options=[
+                        "Change Colors",
+                        "Create New account",
+                        ],
+                        required=True,
+                    )
+                },
+                hide_index=True,
+            )  
     with whatIfButton:
         if st.button("What-If"):
             # Handle What-If button click
