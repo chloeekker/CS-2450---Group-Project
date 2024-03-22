@@ -27,11 +27,7 @@ def main():
     st.title("UVUAdvisor Bot")
 
 
-    settingButton,whatIfButton, searchButton, myProfileButton = st.columns(4)
-    with settingButton:
-        if st.button("Setting"):
-            #Handle settings button (such as color changes)
-            pass
+    whatIfButton, searchButton, myProfileButton = st.columns(3)
     with whatIfButton:
         if st.button("What-If"):
             # Handle What-If button click
@@ -50,7 +46,6 @@ def main():
 
     chat_history = [
         {"sender": "UVUAdvisor Bot", "message": "Hello! How can I assist you today?", "color": "green"},
-        {"sender": "User", "message": "I'd like to know about course requirements for Computer Science.", "color": "grey"}
     ]
     for chat in chat_history:
         chat_bubble(chat["sender"], chat["message"], chat["color"])
@@ -61,11 +56,16 @@ def main():
 
 
     if st.button("Send"):
-        # Handle sending message
+        '''
+        Handles the send button 
+
+        adds message to chat history and clears user_input
+        
+        '''
         chat_history.append({"sender": "User", "message": user_input, "color": "grey"})
         send("User", user_input, "grey")
+        user_input = " "
         
-        pass
 
 if __name__ == "__main__":
     main()
