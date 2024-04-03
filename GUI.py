@@ -111,27 +111,28 @@ def main():
     # Chat Area
     st.subheader("Chat with UVUAdvisor Bot")
 
-    chat_history = [
-        {"sender": "UVUAdvisor Bot", "message": "Hello! How can I assist you today?", "color": "green"},
-    ]
-    for chat in chat_history:
-        chat_bubble(chat["sender"], chat["message"], chat["color"])
+    if "messages" not in st.session_state:
+        st.session_state.messages = []
+
+    for message in st.session_state.messages:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
+
+    if prompt := st.chat_input("Type message here"):
+        #saves user input
+        st.session_state.messages.append({"role": "user", "content": prompt})
+
+        with st.chat_message("user"):
+            st.markdown(prompt)
+
+        with st.chat_message("assistant"):
+            #chat response
+            response = st.write("hey")
+
+        #saves chat bot's response
+        st.session_state.messages.append({"role": "assistant", "content": response})
 
 
-    # Input Bar
-    user_input = st.text_input("Type your message here:", "")
-
-
-    if st.button("Send"):
-        '''
-        Handles the send button 
-
-        adds message to chat history and clears user_input
-        
-        '''
-        chat_history.append({"sender": "User", "message": user_input, "color": "grey"})
-        send("User", user_input, "grey")
-        user_input = " "
         
 
 if __name__ == "__main__":
