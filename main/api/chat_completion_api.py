@@ -11,8 +11,8 @@ import os
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.dirname(SCRIPT_DIR))
 
-from base_api import BaseAPI
-from role import Role
+from api.base_api import BaseAPI
+from api.role import Role
 from typing import List, Dict, Optional, Any
 
 class ChatCompletionAPI(BaseAPI):
@@ -21,7 +21,7 @@ class ChatCompletionAPI(BaseAPI):
     utilizing an enum for role management.
     """
 
-    def __init__(self, base_url: str = "https://4158-161-28-242-155.ngrok-free.app/v1"):
+    def __init__(self, base_url: str = "https://0e80-161-28-242-150.ngrok-free.app/v1"):
         super().__init__(base_url)
         self.conversation_history: List[Dict[str, Any]] = []
 

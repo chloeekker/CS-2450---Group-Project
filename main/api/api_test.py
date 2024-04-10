@@ -11,7 +11,7 @@ import os
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.dirname(SCRIPT_DIR))
 
-from chat_completion_api import ChatCompletionAPI
+from api.chat_completion_api import ChatCompletionAPI
 
 def main():
     chat_api = ChatCompletionAPI()
