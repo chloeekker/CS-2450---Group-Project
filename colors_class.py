@@ -14,3 +14,9 @@ class ColorScheme:
     def custom(self, primary : str, secondary : str):
         self.font = primary
         self.border = secondary
+
+    def get_font(self):
+        return self.font
+    
+    def get_border(self):
+        return self.border
