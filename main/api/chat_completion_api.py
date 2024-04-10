@@ -5,6 +5,12 @@ UVU Advisor Bot
 chat_completion_api.py
 """
 
+import sys
+import os
+
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.dirname(SCRIPT_DIR))
+
 from base_api import BaseAPI
 from role import Role
 from typing import List, Dict, Optional, Any

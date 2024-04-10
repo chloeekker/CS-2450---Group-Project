@@ -5,6 +5,12 @@ UVU Advisor Bot
 base_api.py
 """
 
+import sys
+import os
+
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.dirname(SCRIPT_DIR))
+
 import requests
 from typing import Optional, Dict, Any, Union
 
