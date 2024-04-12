@@ -9,7 +9,7 @@ sys.path.append(os.path.dirname(SCRIPT_DIR))
 
 from advisor_class import advisorBot
 from ta_class import taBot
-from chat_api import ChatCompletionAPI
+from api.chat_completion_api import ChatCompletionAPI
 from frontend.ui_components import UIComponentFactory
 
 
@@ -30,17 +30,20 @@ class GUI:
 
     def process_query(self,user_input, mode):
         if user_input:
-            conversation_key = 'advisor_conversation' if mode == "UVU Advisor" else 'ta_conversation'
+            if mode == "UVU Advisor":
+                conversation_key = 'advisor_conversation'
+            else:
+                conversation_key = 'ta_conversation'
+            
+            # conversation_key = 'advisor_conversation' if mode == "UVU Advisor" else 'ta_conversation'
             st.session_state[conversation_key].append(f"You: {user_input}")
 
             if mode == "UVU Advisor":
                 response = self.advisor.query(user_input)
             else:  
-                response = self.ta_service.provide_hint(user_input)
+                response = self.ta.query(user_input)
 
             st.session_state[conversation_key].append(f"{mode}: {response}")
-            #st.session_state.query = ""
-            st.experimental_rerun() 
     
     def run(self):
         #add columns
@@ -77,7 +80,11 @@ class GUI:
 
         user_input = UIComponentFactory.styled_text_input("Enter your query here:", "query", help_text="Type your question or request for the selected mode.")
 
-        conversation_key = 'advisor_conversation' if mode == "UVU Advisor" else 'ta_conversation'
+        if mode == "UVU Advisor":
+            conversation_key = 'advisor_conversation'
+        else:
+            conversation_key = 'ta_conversation'
+        # conversation_key = 'advisor_conversation' if mode == "UVU Advisor" else 'ta_conversation'
         for message in st.session_state[conversation_key]:
             st.container().markdown(f"> {message}")
 
@@ -86,15 +93,7 @@ class GUI:
 
     
 
-
-
-
 if __name__ == "__main__":
     chat = ChatCompletionAPI(base_url='https://0e80-161-28-242-150.ngrok-free.app/v1')
     app = GUI(chat)
     app.run()
-
-
-
-    
-
