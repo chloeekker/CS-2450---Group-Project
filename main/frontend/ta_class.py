@@ -7,17 +7,17 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.dirname(SCRIPT_DIR))
 
 from api.conversation import Conversation, Message
-from chat_api import ChatCompletionAPI
-from chat_api import Role
-
+from api.chat_completion_api import ChatCompletionAPI
+from api.role import Role
 
 
 class taBot:
     def __init__(self, chat_api: ChatCompletionAPI):
         self.chat_api = chat_api
+        self.context = "You are a UVU computer science TA. You should help the student and give hints, but you are a not to share any code with them."
 
     def query(self, query:str):
-        response = self.chat_api.post_chat_completions(query, role=Role.USER, is_init=False)
+        response = self.chat_api.post_completions(query, stream=False, role=Role.USER)
         if response and 'choices' in response and len(response['choices']) > 0:
             return response['choices'][0]['message']['content']
         else:
