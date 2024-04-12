@@ -1,145 +1,100 @@
-import sys
+import streamlit as st
+import pandas as pd
+
 import os
+import sys
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.dirname(SCRIPT_DIR))
 
-import streamlit as st
-import pandas as pd
+from advisor_class import advisorBot
+from ta_class import taBot
+from chat_api import ChatCompletionAPI
+from frontend.ui_components import UIComponentFactory
 
-class ColorScheme:
-    def __init__(self):
-        self.bg_color = "#dee2e6"
-        self.bg_offset = "#ced4da"
-        self.primary = "#275d38"
-        self.secondary = "#416f4f"
-        self.white = "#ffffff"
-        self.black = "#000000"
-        self.title = "#275d38"
-        self.font1 = "#000000"
-        self.font2 = "#ffffff"
+
+class GUI:
+    def __init__(self,chat_api:ChatCompletionAPI):
+        
+        self.advisor = advisorBot(chat_api)
+        self.ta = taBot(chat_api)
+        if 'advisor_conversation' not in st.session_state:
+            st.session_state.advisor_conversation = []
+        if 'ta_conversation' not in st.session_state:
+            st.session_state.ta_conversation = []
+        if 'selected_mode' not in st.session_state:
+            st.session_state.selected_mode = None
+        if 'visual_mode' not in st.session_state:
+            st.session_state.visual_mode = "Light"
+
+
+    def process_query(self,user_input, mode):
+        if user_input:
+            conversation_key = 'advisor_conversation' if mode == "UVU Advisor" else 'ta_conversation'
+            st.session_state[conversation_key].append(f"You: {user_input}")
+
+            if mode == "UVU Advisor":
+                response = self.advisor.query(user_input)
+            else:  
+                response = self.ta_service.provide_hint(user_input)
+
+            st.session_state[conversation_key].append(f"{mode}: {response}")
+            #st.session_state.query = ""
+            st.experimental_rerun() 
     
-    def set_color_scheme_custom(self, primary : str, secondary : str):
-        self.primary = primary
-        self.secondary = secondary
-
-    def set_color_scheme_dark(self):
-        self.bg_color = "#275d38"
-        self.bg_offset = "#416f4f"
-        self.primary = self.white
-        self.secondary = "#ced4da"
-        self.font1 = self.white
-        self.font2 = self.black
-
-    def reset_to_default(self):
-        self.bg_color = "#dee2e6"
-        self.bg_offset = "#ced4da"
-        self.primary = "#275d38"
-        self.secondary = "#416f4f"
-
-def chat_bubble(sender, message, color):
-    '''
-    Creates message bubbles for chat
-    '''
-
-    st.markdown(f'<div style="background-color: {color}; padding: 10px; border-radius: 10px; margin: 5px;">'
-                f'<p style="margin: 0;">{sender}</p>'
-                f'<p style="margin: 0;">{message}</p>'
-                f'</div>', unsafe_allow_html=True)
-
-
-
-def send(user, message, color):
-    '''
-    
-    '''
-    chat_bubble(user, message, color)
-
-
-
-def main():
-    # Header
-    st.title("UVUAdvisor Bot")
-
-
-    settingButton,colorSelector, roleSelect, myProfileButton = st.columns(4)
-    with settingButton:
-        if st.button("Setting"):
-            setting_df = pd.DataFrame( #Creates the data frame
-            {
-                "Options": [
-                "Change Color",
-                "Create new account",],
-            })
-            st.data_editor(
-                setting_df,
-                # Configurates the colum into a select box column
-                column_config={
-                    "options": st.column_config.SelectboxColumn
-                        ("Setting category",help="The options for setting",width="small",
-                #The different option choices we have
-                        options=[
-                        "Change Colors",
-                        "Create New account",
-                        ],
-                        required=True,
-                    )
-                }
-            )    
-            if st.button("Setting"):
-                hide_index=True
-                pass
-             
-    with colorSelector:
-        if st.button("What-If"):
-            on = st.toggle('Dark Mode')
-            lightMode = st.toggle("LightMode")
-            if on:
-                st.write('Feature activated!')
-            if lightMode:
-                st.write('Feature activited!')
-            # Handle What-If button click
-            pass
-    with roleSelect:
-        if st.button("RoleSelector"):
-            expand = st.expander("Role Select")
-            expand.write("Please Select on of the roles")
-            pop = st.popover("Click to Select Role")
-            pop.checkbox("Show all")
-            with expand:
-                roleSelect = st.radio("Select one:", ["Administrator", "User", "Advisor"])
-            # Handle Search button click
-    with myProfileButton:
-        if st.button("My Profile"):
-            # Handle My Profile button click
-            pass
-
-    # Chat Area
-    st.subheader("Chat with UVUAdvisor Bot")
-
-    if "messages" not in st.session_state:
-        st.session_state.messages = []
-
-    for message in st.session_state.messages:
-        with st.chat_message(message["role"]):
-            st.markdown(message["content"])
-
-    if prompt := st.chat_input("Type message here"):
-        #saves user input
-        st.session_state.messages.append({"role": "user", "content": prompt})
-
-        with st.chat_message("user"):
-            st.markdown(prompt)
-
-        with st.chat_message("assistant"):
-            #chat response
-            response = st.write("hey")
-
-        #saves chat bot's response
-        st.session_state.messages.append({"role": "assistant", "content": response})
-
-
+    def run(self):
+        #add columns
+        setting,profile = st.columns(2)
+        with setting:
+            UIComponentFactory.styled_button_columns("settings")
+        with profile:
+            UIComponentFactory.styled_button_columns("profile")
         
 
+        UIComponentFactory.create_backgroud()
+        UIComponentFactory.create_title("UVU Advisor Bot")
+        UIComponentFactory.create_sidebar_header("Welcome")
+
+        st.sidebar.write("Choose color mode below")
+
+        mode_color = UIComponentFactory.styled_colorbox("Select your mode:", ["Light", "Dark", "Custom"],help_text="Choose color preference")
+
+
+
+
+        st.sidebar.write("Please select the mode and enter the query below")
+
+
+        #modes for light and dark
+        mode = UIComponentFactory.styled_selectbox("Select your mode:", ["UVU Advisor", "UVU TA"], help_text="Choose whether you want advice or tutoring.")
+        if mode != st.session_state.selected_mode:
+            st.session_state.selected_mode = mode
+            if mode == "UVU Advisor":
+                st.session_state.advisor_conversation = []
+            else:  # mode == "UVU TA"
+                st.session_state.ta_conversation = []
+                
+
+        user_input = UIComponentFactory.styled_text_input("Enter your query here:", "query", help_text="Type your question or request for the selected mode.")
+
+        conversation_key = 'advisor_conversation' if mode == "UVU Advisor" else 'ta_conversation'
+        for message in st.session_state[conversation_key]:
+            st.container().markdown(f"> {message}")
+
+        if UIComponentFactory.styled_button("Submit", help_text="Click to submit your query."):
+            self.process_query(user_input, mode)
+
+    
+
+
+
+
 if __name__ == "__main__":
-    main()
+    chat = ChatCompletionAPI(base_url='https://0e80-161-28-242-150.ngrok-free.app/v1')
+    app = GUI(chat)
+    app.run()
+
+
+
+    
+
