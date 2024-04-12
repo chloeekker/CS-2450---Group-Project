@@ -9,7 +9,7 @@ sys.path.append(os.path.dirname(SCRIPT_DIR))
 
 from advisor_class import advisorBot
 from ta_class import taBot
-from api.chat_completion_api import ChatCompletionAPI
+from chat_api import ChatCompletionAPI
 from frontend.ui_components import UIComponentFactory
 
 
@@ -102,15 +102,15 @@ class GUI:
         else:
             conversation_key = 'ta_conversation'
             
-        # conversation_key = 'advisor_conversation' if mode == "UVU Advisor" else 'ta_conversation'
+        count = 0
         for message in st.session_state[conversation_key]:
             #st.container().markdown(f"> {message}")
-            if conversation_key == "advisor_conversation":
-                color = "#006633"            
+            count += 1
+            if count % 2 == 0:
+                color = "#006633"   
             else:
                 color = "#000000"
-                styled_message = f"<span style='color:{color}'>{message}</span>"
-
+            styled_message = f"<span style='color:{color}'>{message}</span>"
             st.container().markdown(styled_message, unsafe_allow_html=True)
 
         if UIComponentFactory.styled_button("Submit", help_text="Click to submit your query."):
