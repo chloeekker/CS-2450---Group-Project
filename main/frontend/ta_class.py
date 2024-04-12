@@ -16,7 +16,7 @@ class taBot:
     def __init__(self, chat_api: ChatCompletionAPI):
         self.chat_api = chat_api
 
-    def query(self,query:str):
+    def query(self, query:str):
         response = self.chat_api.post_chat_completions(query, role=Role.USER, is_init=False)
         if response and 'choices' in response and len(response['choices']) > 0:
             return response['choices'][0]['message']['content']
