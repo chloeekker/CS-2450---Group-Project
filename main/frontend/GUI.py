@@ -44,6 +44,9 @@ class GUI:
                 response = self.ta.query(user_input)
 
             st.session_state[conversation_key].append(f"{mode}: {response}")
+            print(st.session_state[conversation_key])
+
+            st.experimental_rerun()
     
     def run(self):
         #add columns
